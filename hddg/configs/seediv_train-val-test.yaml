@@ -1,0 +1,47 @@
+# HDDG — SEED-IV / train-val-test / subject-dependent
+run_id: seediv_train-val-test
+
+dataset:
+  name: seediv
+  root_dir: data/SEED_IV
+  num_classes: 4
+  num_electrodes: 62
+  sessions: [1, 2, 3]
+
+hilbert:
+  window_size: 1.0
+  overlap: 0.0
+  freq_bands: [[1, 4], [4, 8], [8, 14], [14, 30], [30, 45]]
+
+split:
+  method: train-val-test
+  experiment_mode: subject-dependent
+  cross_trial: true
+  test_ratio: 0.2
+  val_ratio: 0.2
+  random_state: 2025
+
+model:
+  embed_dim: 48
+  k: 2
+  layers: [64]
+  dropout: 0.35
+  fusion_init: [0.25, 0.25, 0.5]
+
+graph:
+  method: distance
+  threshold: 0.1
+
+training:
+  batch_size: 16
+  epochs: 80
+  lr: 0.002
+  weight_decay: 1.0e-4
+  label_smoothing: 0.0
+  n_seeds: 1
+  warmup_epochs: 0
+  class_weights: null
+
+log:
+  save_path: result/seediv_train-val-test/models/
+  save_model: true

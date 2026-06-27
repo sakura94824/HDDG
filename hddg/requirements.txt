@@ -1,0 +1,11 @@
+# Core dependencies for HDDG main experiments.
+# Install PyTorch separately for your CUDA version, e.g.:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu118
+
+numpy
+scipy
+PyYAML
+scikit-learn
+pandas
+tqdm
+torch

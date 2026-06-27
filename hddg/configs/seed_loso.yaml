@@ -1,0 +1,45 @@
+# HDDG — SEED / LOSO / subject-independent
+run_id: seed_loso
+
+dataset:
+  name: seed
+  root_dir: data/SEED_EEG
+  num_classes: 3
+  num_electrodes: 62
+  sessions: [1, 2, 3]
+
+hilbert:
+  window_size: 1.0
+  overlap: 0.0
+  freq_bands: [[1, 4], [4, 8], [8, 14], [14, 30], [30, 45]]
+
+split:
+  method: leave-one-out
+  experiment_mode: subject-independent
+  cross_trial: true
+  random_state: 2025
+
+model:
+  embed_dim: 48
+  k: 2
+  layers: [64]
+  dropout: 0.35
+  fusion_init: [0.25, 0.25, 0.5]
+
+graph:
+  method: distance
+  threshold: 0.1
+
+training:
+  batch_size: 16
+  epochs: 80
+  lr: 0.002
+  weight_decay: 1.0e-4
+  label_smoothing: 0.0
+  n_seeds: 1
+  warmup_epochs: 0
+  class_weights: null
+
+log:
+  save_path: result/seed_loso/models/
+  save_model: true
